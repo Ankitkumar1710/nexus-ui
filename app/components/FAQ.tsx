@@ -1,104 +1,185 @@
-'use client';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './Accordion';
+'use client'
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './Accordion'
+import Image from 'next/image'
 
 const FAQ = () => {
   const faqs = [
     {
-      question: 'How to hire manpower through Nexus Solutions?',
+      question: 'How can I hire manpower?',
       answer:
-        'Simply contact us via phone (+91 7070637489) or WhatsApp with your requirements. Our team will understand your needs, provide suitable candidates, and handle all the documentation and deployment processes.',
+        'You can contact us via phone or WhatsApp. Our team will understand your requirement and deploy suitable manpower quickly.',
     },
     {
-      question: 'What is the verification process for candidates?',
+      question: 'How do you verify candidates?',
       answer:
-        'All our candidates undergo thorough background verification including identity proof, address verification, police verification, and reference checks. We also verify their skills and experience through practical assessments.',
+        'We perform ID verification, address checks, police verification, reference checks and skill evaluation.',
     },
     {
-      question: 'How long does it take for deployment?',
+      question: 'How fast is deployment?',
       answer:
-        'Depending on your requirements, we can deploy manpower within 24-48 hours for urgent needs. For specialized roles, it may take 3-5 business days to ensure we provide the best-suited candidates.',
+        'Urgent manpower can be deployed within 24–48 hours. Specialized roles may take 3–5 working days.',
     },
     {
-      question: 'What are your pricing and payment terms?',
+      question: 'What are the payment terms?',
       answer:
-        'Our pricing is competitive and transparent with no hidden costs. We offer flexible payment terms based on your requirements - monthly, quarterly, or project-based. Contact us for a customized quote.',
+        'We provide flexible payment models including monthly, project based and contract hiring with transparent billing.',
     },
     {
-      question: 'Do you provide replacement if a candidate is not suitable?',
+      question: 'Do you provide replacement support?',
       answer:
-        'Yes, we offer a replacement guarantee. If a candidate is not meeting your expectations within the agreed trial period, we will provide a suitable replacement at no additional cost.',
+        'Yes. If manpower is not suitable during trial period, replacement is provided without extra charges.',
     },
     {
-      question: 'Are you compliant with labor laws and regulations?',
+      question: 'Are you legally compliant?',
       answer:
-        'Absolutely. We ensure full compliance with all applicable labor laws, including minimum wages, PF, ESI, and other statutory requirements. All documentation and legal formalities are handled professionally.',
+        'We follow PF, ESI, minimum wage laws and all statutory labour regulations.',
     },
-    {
-      question: 'Can I hire manpower for short-term projects?',
-      answer:
-        'Yes, we provide flexible hiring solutions for both short-term projects and long-term requirements. Whether you need staff for a day, a week, or several months, we can accommodate your needs.',
-    },
-    {
-      question: 'How can I apply for a job with Nexus Solutions?',
-      answer:
-        'You can apply through our Careers section on this website by filling out the application form. Alternatively, you can call or WhatsApp us at +91 7070637489 with your details and job preferences.',
-    },
-  ];
+  ]
 
   return (
-    <section id="faq" className="py-20 bg-white">
+    <section
+      id="faq"
+      className="py-20 bg-gradient-to-br from-gray-100 via-white to-red-50 dark:from-black dark:via-[#0f0f0f] dark:to-black"
+    >
       <div className="container mx-auto px-4">
+
+        {/* HEADER */}
         <div className="max-w-3xl mx-auto text-center mb-16">
+
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Frequently Asked <span className="text-orange-500">Questions</span>
+            Frequently Asked <span className="text-brand">Questions</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-orange-500 mx-auto mb-6"></div>
-          <p className="text-lg text-gray-600">
-            Find answers to common questions about our services and processes
+
+          <div className="w-24 h-1 bg-brand mx-auto mb-6" />
+
+          <p className="text-lg text-gray-600 dark:text-gray-400">
+            Everything you need to know about our manpower services
           </p>
+
         </div>
 
-        <div className="max-w-4xl mx-auto">
-          <Accordion type="single" collapsible className="space-y-4">
-            {faqs.map((faq, index) => (
-              <AccordionItem
-                key={index}
-                value={`item-${index}`}
-                className="bg-gradient-to-br from-gray-50 to-white border-2 border-gray-200 rounded-xl px-6 hover:border-orange-500/50 transition-colors"
-              >
-                <AccordionTrigger className="text-left font-semibold text-gray-900 hover:text-orange-500 py-6">
-                  {faq.question}
-                </AccordionTrigger>
-                <AccordionContent className="text-gray-600 leading-relaxed pb-6">
-                  {faq.answer}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
+        {/* TWO COLUMN LAYOUT */}
+        <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+
+          {/* LEFT FAQ */}
+
+          <div className="relative">
+
+            <div className="absolute -inset-6 bg-brand/10 blur-3xl rounded-full"></div>
+
+            <Image
+              src="/faq.png"   // <-- Place your FAQ image here in public folder
+              alt="FAQ Support"
+              width={500}
+              height={500}
+              className="relative rounded-2xl shadow-xl"
+              priority
+            />
+
+          </div>
+
+          {/* RIGHT IMAGE */}
+
+          <div>
+
+            <Accordion type="single" collapsible className="space-y-4">
+
+              {faqs.map((faq, index) => (
+
+                <AccordionItem
+                  key={index}
+                  value={`item-${index}`}
+                  className="
+                    bg-white dark:bg-[#141414]
+                    
+                    border border-gray-200 dark:border-gray-700
+                    rounded-xl
+                    px-6
+                    shadow-sm hover:shadow-md
+                    transition-all
+                  "
+                >
+
+                  <AccordionTrigger
+                    className="
+  text-left
+  text-base md:text-lg
+  font-semibold
+  text-gray-900 dark:text-white
+  hover:text-brand
+  py-6
+"
+
+                  >
+                    {faq.question}
+                  </AccordionTrigger>
+
+                  <AccordionContent
+                    className="
+                      text-gray-600 dark:text-gray-400
+                      leading-relaxed
+                      pb-6
+                    "
+                  >
+                    {faq.answer}
+                  </AccordionContent>
+
+                </AccordionItem>
+
+              ))}
+
+            </Accordion>
+
+          </div>
         </div>
 
+        {/* CTA */}
         <div className="mt-16 text-center">
-          <p className="text-lg text-gray-700 mb-6">
-            Still have questions? We're here to help!
+
+          <p className="text-lg text-gray-700 dark:text-gray-300 mb-6">
+            Still confused? Talk directly with our support team
           </p>
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
+
             <button
-              onClick={() => window.open('tel:+917070637489', '_self')}
-              className="inline-flex items-center px-8 py-4 bg-blue-500 text-white font-semibold rounded-xl hover:shadow-lg transition-all duration-300"
+              onClick={() => window.open('tel:+917070637489')}
+              className="
+                px-8 py-4
+                bg-brand
+                text-white
+                font-semibold
+                rounded-xl
+                hover:opacity-90
+                transition-all
+                shadow-md
+              "
             >
-              Call Us
+              Call Now
             </button>
+
             <button
-              onClick={() => window.open('https://wa.me/917070637489', '_blank')}
-              className="inline-flex items-center px-8 py-4 bg-orange-500 text-white font-semibold rounded-xl hover:shadow-lg transition-all duration-300"
+              onClick={() => window.open('https://wa.me/917070637489')}
+              className="
+                px-8 py-4
+                border-2 border-brand
+                text-brand
+                hover:bg-brand hover:text-white
+                font-semibold
+                rounded-xl
+                transition-all
+              "
             >
               WhatsApp Us
             </button>
+
           </div>
+
         </div>
+
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default FAQ;
+export default FAQ

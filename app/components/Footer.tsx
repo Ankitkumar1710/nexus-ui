@@ -1,119 +1,175 @@
-'use client';
-import { Heart, Phone, Mail, MapPin } from 'lucide-react';
-import { SiFacebook, SiInstagram, SiLinkedin, SiX } from 'react-icons/si';
+'use client'
+import { Heart, Phone, Mail, MapPin } from 'lucide-react'
+import { SiFacebook, SiInstagram, SiLinkedin, SiX } from 'react-icons/si'
 import Image from 'next/image'
 
-
 const Footer = () => {
-  const currentYear = new Date().getFullYear();
+  const currentYear = new Date().getFullYear()
 
   const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
+    const element = document.getElementById(id)
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
-  };
+  }
 
   return (
-    <footer className="bg-gradient-to-br from-gray-900 to-gray-800 text-white">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-          {/* Company Info */}
+    <footer className="bg-gradient-to-br from-gray-900 via-black to-[#120707] text-white">
+
+      <div className="container mx-auto px-4 py-16">
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+
+          {/* COMPANY INFO */}
           <div>
-           <Image
-                         src="/logo1.png"
-                         alt="Nexus Solutions"
-                         width={120}
-                         height={50}
-                         className="h-18 w-auto"
-                       />
-            <p className="text-gray-300 mb-4 mt-6">
-              Your trusted partner for reliable manpower solutions across Bihar and beyond.
+
+            <Image
+              src="/logo.png"
+              alt="Company Logo"
+              width={140}
+              height={60}
+              className="h-20 w-auto"
+              priority
+            />
+
+            <p className="text-gray-400 mt-6 leading-relaxed">
+              Trusted manpower partner delivering reliable workforce solutions
+              across Bihar and nearby regions.
             </p>
-            <div className="flex space-x-4">
-              <a href="#" className="text-gray-300 hover:text-orange-500 transition-colors">
-                <SiFacebook className="w-5 h-5" />
-              </a>
-              <a href="#" className="text-gray-300 hover:text-orange-500 transition-colors">
-                <SiInstagram className="w-5 h-5" />
-              </a>
-              <a href="#" className="text-gray-300 hover:text-orange-500 transition-colors">
-                <SiLinkedin className="w-5 h-5" />
-              </a>
-              <a href="#" className="text-gray-300 hover:text-orange-500 transition-colors">
-                <SiX className="w-5 h-5" />
-              </a>
+
+            {/* SOCIAL ICONS */}
+            <div className="flex gap-4 mt-6">
+
+              {[SiFacebook, SiInstagram, SiLinkedin, SiX].map((Icon, index) => (
+                <a
+                  key={index}
+                  href="#"
+                  className="
+                    p-2 rounded-lg
+                    bg-gray-800 hover:bg-brand
+                    transition-all duration-300
+                  "
+                >
+                  <Icon className="w-5 h-5" />
+                </a>
+              ))}
+
             </div>
+
           </div>
 
-          {/* Quick Links */}
+          {/* QUICK LINKS */}
           <div>
-            <h3 className="text-lg font-bold mb-4">Quick Links</h3>
-            <ul className="space-y-2">
+
+            <h3 className="text-lg font-bold mb-5 text-brand">
+              Quick Links
+            </h3>
+
+            <ul className="space-y-3">
+
               {['about', 'services', 'why-choose', 'industries', 'faq', 'careers', 'contact'].map((item) => (
+
                 <li key={item}>
                   <button
                     onClick={() => scrollToSection(item)}
-                    className="text-gray-300 hover:text-orange-500 transition-colors"
+                    className="
+                      text-gray-400
+                      hover:text-brand
+                      transition-colors
+                    "
                   >
                     {item.charAt(0).toUpperCase() + item.slice(1).replace('-', ' ')}
                   </button>
                 </li>
+
               ))}
+
             </ul>
+
           </div>
 
-          {/* Services */}
+          {/* SERVICES */}
           <div>
-            <h3 className="text-lg font-bold mb-4">Our Services</h3>
-            <ul className="space-y-2 text-gray-300">
+
+            <h3 className="text-lg font-bold mb-5 text-brand">
+              Our Services
+            </h3>
+
+            <ul className="space-y-3 text-gray-400">
+
               <li>Hospital Staff</li>
               <li>Factory Workers</li>
               <li>Office Support</li>
               <li>Security Guards</li>
               <li>Housekeeping</li>
-              <li>Skilled Labour</li>
+              <li>Skilled & Unskilled Labour</li>
+
             </ul>
+
           </div>
 
-          {/* Contact Info */}
+          {/* CONTACT */}
           <div>
-            <h3 className="text-lg font-bold mb-4">Contact Us</h3>
-            <ul className="space-y-3">
-              <li className="flex items-start space-x-3">
-                <Phone className="w-5 h-5 text-orange-500 flex-shrink-0 mt-0.5" />
-                <a href="tel:+917070637489" className="text-gray-300 hover:text-orange-500 transition-colors">
+
+            <h3 className="text-lg font-bold mb-5 text-brand">
+              Contact Us
+            </h3>
+
+            <ul className="space-y-4">
+
+              <li className="flex gap-3">
+                <Phone className="text-brand mt-1" />
+                <a
+                  href="tel:+917070637489"
+                  className="text-gray-400 hover:text-brand transition-colors"
+                >
                   +91 7070637489
                 </a>
               </li>
-              <li className="flex items-start space-x-3">
-                <Mail className="w-5 h-5 text-orange-500 flex-shrink-0 mt-0.5" />
-                <a href="mailto:info@nexussolutions.in" className="text-gray-300 hover:text-orange-500 transition-colors">
+
+              <li className="flex gap-3">
+                <Mail className="text-brand mt-1" />
+                <a
+                  href="mailto:info@nexussolutions.in"
+                  className="text-gray-400 hover:text-brand transition-colors"
+                >
                   info@nexussolutions.in
                 </a>
               </li>
-              <li className="flex items-start space-x-3">
-                <MapPin className="w-5 h-5 text-orange-500 flex-shrink-0 mt-0.5" />
-                <span className="text-gray-300">
-                  Boring Road, Patna<br />Bihar, India
+
+              <li className="flex gap-3">
+                <MapPin className="text-brand mt-1" />
+                <span className="text-gray-400">
+                  Boring Road, Patna<br />
+                  Bihar, India
                 </span>
               </li>
+
             </ul>
+
           </div>
+
         </div>
 
-        <div className="border-t border-gray-700 pt-8">
-          <div className="text-center text-gray-300">
-            <p className="flex items-center justify-center flex-wrap gap-1">
-              © {currentYear} Nexus Solutions. All rights reserved. Built with{' '}
-              <Heart className="w-4 h-4 text-red-500 fill-current mx-1" />
-              using Next.js
+        {/* BOTTOM BAR */}
+        <div className="border-t border-gray-800 pt-8">
+
+          <div className="text-center text-gray-400">
+
+            <p className="flex justify-center items-center gap-2 flex-wrap">
+              © {currentYear} All Rights Reserved
+              <Heart className="w-4 h-4 text-brand fill-current" />
+              Built with Next.js
             </p>
-          </div>
-        </div>
-      </div>
-    </footer>
-  );
-};
 
-export default Footer;
+          </div>
+
+        </div>
+
+      </div>
+
+    </footer>
+  )
+}
+
+export default Footer

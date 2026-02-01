@@ -1,26 +1,76 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* =========================
+   BASE THEME
+========================= */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* Light Mode */
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #ffffff;
+  color: #171717;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark Mode */
+
+html.dark body {
+  background-color: #0f0f0f;
+  color: #ededed;
+}
+
+/* =========================
+   BRAND COLORS (NEXUS)
+========================= */
+
+.text-brand {
+  color: #c62828;
+}
+
+.bg-brand {
+  background-color: #c62828;
+}
+
+.border-brand {
+  border-color: #c62828;
+}
+
+/* =========================
+   COMMON UI FIXES
+========================= */
+
+/* Container spacing */
+
+.container {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Smooth scroll */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection color */
+
+::selection {
+  background: #c62828;
+  color: white;
+}
+
+/* =========================
+   DARK MODE HELPERS
+========================= */
+
+.dark .card {
+  background-color: #1a1a1a;
+  border-color: #2a2a2a;
+}
+
+.dark .section-bg {
+  background-color: #111111;
 }

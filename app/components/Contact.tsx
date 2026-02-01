@@ -1,121 +1,194 @@
-'use client';
-import { MapPin, Phone, Mail, Clock } from 'lucide-react';
+'use client'
+import { MapPin, Phone, Mail, Clock } from 'lucide-react'
 
 const Contact = () => {
   return (
-    <section id="contact" className="py-20 bg-white">
+    <section
+      id="contact"
+      className="py-20 bg-gradient-to-br from-gray-100 via-white to-red-50 dark:from-black dark:via-[#0f0f0f] dark:to-black"
+    >
       <div className="container mx-auto px-4">
-        <div className="max-w-3xl mx-auto text-center mb-16">
+
+        {/* HEADER */}
+        <div className="max-w-3xl mx-auto text-center mb-16 animate-fade-in">
+
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Contact <span className="text-orange-500">Us</span>
+            Contact <span className="text-brand">Us</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-orange-500 mx-auto mb-6"></div>
-          <p className="text-lg text-gray-600">
-            Get in touch with us for all your manpower requirements
+
+          <div className="w-24 h-1 bg-brand mx-auto mb-6"></div>
+
+          <p className="text-lg text-gray-600 dark:text-gray-400">
+            Reach out to us for reliable manpower and staffing solutions
           </p>
+
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-          {/* Contact Information */}
-          <div className="space-y-8">
-            <div className="bg-gradient-to-br from-gray-50 to-white p-8 rounded-2xl border-2 border-gray-200">
-              <h3 className="text-2xl font-bold mb-6 text-gray-900">Get In Touch</h3>
-              
-              <div className="space-y-6">
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-orange-500 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Phone className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900 mb-1">Phone</h4>
-                    <a href="tel:+917070637489" className="text-orange-500 hover:underline text-lg">
-                      +91 7070637489
-                    </a>
-                  </div>
+        <div className="grid lg:grid-cols-2 gap-10 max-w-6xl mx-auto">
+
+          {/* CONTACT INFO CARD */}
+          <div
+            className="
+              group
+              bg-white dark:bg-[#141414]
+              rounded-xl p-8
+              shadow-md hover:shadow-xl
+              border border-gray-200 dark:border-gray-700
+              transition-all duration-300
+              hover:-translate-y-1
+            "
+          >
+
+            <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
+              Get In Touch
+            </h3>
+
+            <div className="space-y-6">
+
+              {/* PHONE */}
+             <div className="flex gap-4">
+  <div className="bg-brand p-3 rounded-lg shadow-md">
+    <Phone className="text-white" />
+  </div>
+
+  <div>
+    <p className="font-semibold dark:text-white">Phone</p>
+
+    <p className="text-brand font-medium">
+      +91 7070637489
+    </p>
+
+    <p className="text-gray-600 dark:text-gray-400">
+      +91 8479968278
+    </p>
+  </div>
+</div>
+
+
+              {/* EMAIL */}
+              <div className="flex gap-4 items-start">
+                <div className="bg-brand p-3 rounded-lg shadow-md">
+                  <Mail className="text-white" />
                 </div>
 
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-orange-500 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Mail className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900 mb-1">Email</h4>
-                    <a href="mailto:info@nexussolutions.in" className="text-gray-600 hover:text-orange-500">
-                      info@nexussolutions.in
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-orange-500 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <MapPin className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900 mb-1">Office Address</h4>
-                    <p className="text-gray-600">
-                      Boring Road, Patna<br />
-                      Bihar, India
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-orange-500 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Clock className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900 mb-1">Business Hours</h4>
-                    <p className="text-gray-600">
-                      Monday - Saturday: 9:00 AM - 7:00 PM<br />
-                      Sunday: 10:00 AM - 5:00 PM
-                    </p>
-                  </div>
+                <div>
+                  <p className="font-semibold dark:text-white">Email</p>
+                  <p className="text-gray-600 dark:text-gray-400">
+                    info@nexussolutions.in
+                  </p>
                 </div>
               </div>
 
-              <div className="mt-8 pt-8 border-t border-gray-200">
-                <h4 className="font-semibold text-gray-900 mb-4">Quick Actions</h4>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <button
-                    onClick={() => window.open('tel:+917070637489', '_self')}
-                    className="flex-1 px-6 py-3 bg-blue-500 text-white font-semibold rounded-xl hover:shadow-lg transition-all duration-300"
-                  >
-                    Call Now
-                  </button>
-                  <button
-                    onClick={() => window.open('https://wa.me/917070637489', '_blank')}
-                    className="flex-1 px-6 py-3 bg-orange-500 text-white font-semibold rounded-xl hover:shadow-lg transition-all duration-300"
-                  >
-                    WhatsApp
-                  </button>
+              {/* ADDRESS */}
+              <div className="flex gap-4 items-start">
+                <div className="bg-brand p-3 rounded-lg shadow-md">
+                  <MapPin className="text-white" />
+                </div>
+
+                <div>
+                  <p className="font-semibold dark:text-white">
+                    Office Address
+                  </p>
+                  <p className="text-gray-600 dark:text-gray-400">
+                    Boring Road, Patna<br />
+                    Bihar, India
+                  </p>
                 </div>
               </div>
+
+              {/* TIME */}
+              <div className="flex gap-4 items-start">
+                <div className="bg-brand p-3 rounded-lg shadow-md">
+                  <Clock className="text-white" />
+                </div>
+
+                <div>
+                  <p className="font-semibold dark:text-white">
+                    Business Hours
+                  </p>
+                  <p className="text-gray-600 dark:text-gray-400">
+                    Mon – Sat: 9:00 AM – 7:00 PM<br />
+                    Sun: 10:00 AM – 5:00 PM
+                  </p>
+                </div>
+              </div>
+
             </div>
+
+            {/* ACTION BUTTONS */}
+            <div className="mt-8 flex gap-4">
+
+              <button
+                onClick={() => window.open('tel:+917070637489')}
+                className="
+                  flex-1
+                  bg-brand hover:opacity-90
+                  text-white
+                  py-3
+                  rounded-xl
+                  font-semibold
+                  transition-all
+                  shadow-md
+                "
+              >
+                Call Now
+              </button>
+
+              <button
+                onClick={() => window.open('https://wa.me/917070637489')}
+                className="
+                  flex-1
+                  border-2 border-brand
+                  text-brand
+                  hover:bg-brand hover:text-white
+                  py-3
+                  rounded-xl
+                  font-semibold
+                  transition-all
+                "
+              >
+                WhatsApp
+              </button>
+
+            </div>
+
           </div>
 
-          {/* Map */}
-          <div className="bg-gradient-to-br from-gray-50 to-white p-8 rounded-2xl border-2 border-gray-200">
-            <h3 className="text-2xl font-bold mb-6 text-gray-900">Find Us</h3>
-            <div className="rounded-xl overflow-hidden shadow-lg h-[400px]">
+          {/* MAP CARD */}
+          <div
+            className="
+              bg-white dark:bg-[#141414]
+              rounded-xl p-6
+              shadow-md hover:shadow-xl
+              border border-gray-200 dark:border-gray-700
+              transition-all duration-300
+              hover:-translate-y-1
+            "
+          >
+
+            <h3 className="text-xl font-bold mb-4 dark:text-white">
+              Our Location
+            </h3>
+
+            <div className="rounded-xl overflow-hidden h-[380px]">
+
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3598.0!2d85.1376!3d25.5941!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f29937c52d4f05%3A0x831a0e05f607b270!2sBoring%20Road%2C%20Patna%2C%20Bihar!5e0!3m2!1sen!2sin!4v1234567890"
+                src="https://www.google.com/maps?q=Boring+Road+Patna&output=embed"
                 width="100%"
                 height="100%"
-                style={{ border: 0 }}
-                allowFullScreen
                 loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Nexus Solutions Office Location"
-              ></iframe>
+                style={{ border: 0 }}
+              />
+
             </div>
-            <p className="text-sm text-gray-600 mt-4 text-center">
-              Visit our office at Boring Road, Patna for in-person consultations
-            </p>
+
           </div>
+
         </div>
+
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Contact;
+export default Contact
