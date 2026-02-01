@@ -1,5 +1,6 @@
 'use client'
 import { CheckCircle2, Users, ShieldCheck, Briefcase } from 'lucide-react'
+import Rating from './Rating'
 
 const About = () => {
 
@@ -8,19 +9,19 @@ const About = () => {
       icon: Users,
       title: 'Requirement Analysis',
       desc: 'We understand your manpower requirement and project scope in detail.',
-      img: '/about-1.jpg',
+      img: '/ana1.png',
     },
     {
       icon: ShieldCheck,
       title: 'Verification Process',
       desc: 'Candidates go through background verification and skill screening.',
-      img: '/about-2.jpg',
+      img: '/auth.png',
     },
     {
       icon: Briefcase,
       title: 'Deployment',
       desc: 'Trained manpower is deployed quickly with full compliance.',
-      img: '/about-3.jpg',
+      img: '/abt3.png',
     },
   ]
 
@@ -163,7 +164,7 @@ const About = () => {
           })}
 
         </div>
-
+<Rating/>
       </div>
     </section>
   )

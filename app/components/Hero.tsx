@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { Phone, MessageCircle } from 'lucide-react'
+import JobApplyForm from './JobApplyForm'
 
 const Hero = () => {
 
@@ -118,7 +119,6 @@ const Hero = () => {
       <MessageCircle className="w-5 h-5 mr-2" />
       WhatsApp Us
     </button>
-
   </div>
 
   {/* COUNTERS */}
@@ -153,7 +153,6 @@ const Hero = () => {
     </div>
 
   </div>
-
 </div>
 
 

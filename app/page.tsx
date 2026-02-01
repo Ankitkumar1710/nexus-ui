@@ -3,6 +3,7 @@ import Hero from './components/Hero'
 import About from './components/About'
 import Services from './components/Services'
 import Industries from './components/Industries'
+import CareersForm from './components/JobApplyForm'
 import WhyChooseUs from './components/WhyChooseUs'
 import FAQ from './components/FAQ'
 import Contact from './components/Contact'
@@ -21,6 +22,7 @@ export default function Home() {
         <About />
         <Services />
         <Industries />
+        <CareersForm/>
         <WhyChooseUs />
         <FAQ/>
         <Contact />
