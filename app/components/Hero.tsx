@@ -3,127 +3,164 @@ import { useState, useEffect } from 'react'
 import { Phone, MessageCircle } from 'lucide-react'
 
 const Hero = () => {
-    const [currentProject, setCurrentProject] = useState(150)
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentProject((prev) => (prev >= 500 ? 150 : prev + 1))
-        }, 40)
+  // COUNTER STATE
+  const [counts, setCounts] = useState({
+    projects: 0,
+    clients: 0,
+    workforce: 0,
+    experience: 0,
+  })
 
-        return () => clearInterval(interval)
-    }, [])
+  // COUNTER ANIMATION
+  useEffect(() => {
 
-    const handleWhatsApp = () => {
-        window.open('https://wa.me/917070637489', '_blank')
+    const targets = {
+      projects: 500,
+      clients: 1000,
+      workforce: 1500,
+      experience: 5,
     }
 
-    const handleCall = () => {
-        window.open('tel:+917070637489', '_self')
-    }
+    const duration = 2500
+    const steps = 60
+    const intervalTime = duration / steps
 
-    return (
-        <section
-            id="hero"
-            className="relative bg-gradient-to-br from-gray-100 via-white to-red-50 dark:from-black dark:via-[#0f0f0f] dark:to-black"
-        >
-            <div className="container mx-auto px-4 py-16 md:py-24">
-                <div className="grid lg:grid-cols-2 gap-12 items-center">
+    let step = 0
 
-                    {/* LEFT CONTENT */}
-                    <div className="space-y-8">
+    const interval = setInterval(() => {
+      step++
 
-                        {/* MAIN HEADING */}
-                        <div className="space-y-4">
-                            <h1 className="text-4xl md:text-5xl font-bold leading-tight">
-                                <span className="text-brand">Your Growth Partner</span> In Workforce Management
-                            </h1>
-                            <p className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 font-medium">
-                                Supplying Verified, Trained & Project-Ready Manpower Across India
-                            </p>
-                        </div>
+      setCounts({
+        projects: Math.min(Math.floor((targets.projects / steps) * step), targets.projects),
+        clients: Math.min(Math.floor((targets.clients / steps) * step), targets.clients),
+        workforce: Math.min(Math.floor((targets.workforce / steps) * step), targets.workforce),
+        experience: Math.min(Math.floor((targets.experience / steps) * step), targets.experience),
+      })
 
-                        {/* DESCRIPTION */}
-                        <p className="text-lg text-gray-600 dark:text-gray-400">
-                            We help businesses complete projects faster by supplying verified,
-                            trained and reliable manpower across Bihar and other major regions
-                            of India.
-                        </p>
+      if (step === steps) clearInterval(interval)
 
-                        {/* CTA BUTTONS */}
-                        <div className="flex flex-col sm:flex-row gap-4">
+    }, intervalTime)
 
-                            <button
-                                onClick={handleCall}
-                                className="bg-brand hover:opacity-90 text-white text-lg px-8 py-4 rounded-lg font-semibold transition-all flex items-center justify-center shadow-md"
-                            >
-                                <Phone className="w-5 h-5 mr-2" />
-                                Call Now
-                            </button>
+    return () => clearInterval(interval)
 
-                            <button
-                                onClick={handleWhatsApp}
-                                className="border-2 border-brand text-brand hover:bg-brand hover:text-white text-lg px-8 py-4 rounded-lg font-semibold transition-all flex items-center justify-center"
-                            >
-                                <MessageCircle className="w-5 h-5 mr-2" />
-                                WhatsApp Us
-                            </button>
+  }, [])
 
-                        </div>
+  const handleWhatsApp = () => {
+    window.open('https://wa.me/917070637489', '_blank')
+  }
 
-                        {/* PROJECT COUNTER CARD */}
-                        <div
-                            className="
-                bg-white dark:bg-[#141414]
-                rounded-xl
-                shadow-md
-                p-6
-                border
-                border-gray-200 dark:border-gray-700
-                max-w-sm
-              "
-                        >
-                            <div className="text-center">
-                                <div className="text-5xl font-bold text-brand mb-2">
-                                    {currentProject}+
-                                </div>
+  const handleCall = () => {
+    window.open('tel:+917070637489', '_self')
+  }
 
-                                <div className="text-lg font-medium text-gray-700 dark:text-gray-300">
-                                    Projects Successfully Delivered
-                                </div>
-                            </div>
-                        </div>
+  return (
+    <section
+      id="hero"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+    >
 
-                    </div>
+      {/* VIDEO BACKGROUND */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover scale-110"
+      >
+        <source src="/hero-bg.mp4" type="video/mp4" />
+      </video>
 
-                    {/* RIGHT IMAGE */}
-                    <div className="relative flex justify-center lg:justify-end">
+      {/* BLUR LAYER */}
+      <div className="absolute inset-0 backdrop-blur-[6px]" />
 
-                        <div className="absolute -inset-8 bg-gradient-to-br from-red-200/40 to-gray-300/30 dark:from-red-500/10 dark:to-gray-700/10 blur-3xl rounded-full"></div>
+      {/* DARK GRADIENT OVERLAY */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80" />
 
-                        <img
-                            src="/hero.png"
-                            alt="Manpower Services"
-                            className="relative w-[300px] sm:w-[380px] md:w-[460px] lg:w-[520px] drop-shadow-2xl"
-                        />
+      {/* CONTENT */}
+      <div className="relative z-10 container mx-auto px-4">
 
-                    </div>
+        <div className="max-w-5xl mt-8 mx-auto text-center space-y-4">
 
-                </div>
-            </div>
+  {/* HEADING */}
+  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-snug text-white whitespace-nowrap">
+    <span className="text-brand">Trusted Manpower</span> Service Provider
+  </h1>
 
-            {/* BOTTOM WAVE */}
-            <div className="absolute bottom-0 left-0 right-0">
-                <svg viewBox="0 0 1440 120" className="w-full">
-                    <path
-                        fill="white"
-                        className="dark:fill-black"
-                        d="M0,64L48,69.3C96,75,192,85,288,80C384,75,480,53,576,48C672,43,768,53,864,58.7C960,64,1056,64,1152,58.7C1248,53,1344,43,1392,37.3L1440,32L1440,120L0,120Z"
-                    />
-                </svg>
-            </div>
+  {/* SUB TEXT */}
+ <p className="text-base md:text-xl text-gray-200">
+  Delivering Workforce Solutions Trusted By Growing Businesses
+</p>
 
-        </section>
-    )
+
+
+  {/* DESCRIPTION */}
+  <p className="text-gray-300 max-w-xl mx-auto leading-relaxed">
+    We help companies complete projects faster by providing reliable,
+    verified and professional manpower for industrial, hospital and corporate needs.
+  </p>
+
+  {/* CTA BUTTONS */}
+  <div className="flex flex-col sm:flex-row justify-center gap-4 pt-2">
+
+    <button
+      onClick={handleCall}
+      className="bg-brand hover:opacity-90 text-white px-8 py-4 rounded-lg font-semibold flex items-center justify-center shadow-xl transition"
+    >
+      <Phone className="w-5 h-5 mr-2" />
+      Call Now
+    </button>
+
+    <button
+      onClick={handleWhatsApp}
+      className="border-2 border-white text-white hover:bg-white hover:text-black px-8 py-4 rounded-lg font-semibold flex items-center justify-center transition"
+    >
+      <MessageCircle className="w-5 h-5 mr-2" />
+      WhatsApp Us
+    </button>
+
+  </div>
+
+  {/* COUNTERS */}
+  <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-6">
+
+    <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl p-4 shadow-lg">
+      <div className="text-3xl font-bold text-brand">
+        {counts.projects}+
+      </div>
+      <p className="text-gray-200 text-sm mt-1">Projects Completed</p>
+    </div>
+
+    <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl p-4 shadow-lg">
+      <div className="text-3xl font-bold text-brand">
+        {counts.clients}+
+      </div>
+      <p className="text-gray-200 text-sm mt-1">Satisfied Clients</p>
+    </div>
+
+    <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl p-4 shadow-lg">
+      <div className="text-3xl font-bold text-brand">
+        {counts.workforce}+
+      </div>
+      <p className="text-gray-200 text-sm mt-1">Skilled Workforce</p>
+    </div>
+
+    <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl p-4 shadow-lg">
+      <div className="text-3xl font-bold text-brand">
+        {counts.experience}+
+      </div>
+      <p className="text-gray-200 text-sm mt-1">Years Experience</p>
+    </div>
+
+  </div>
+
+</div>
+
+
+      </div>
+
+    </section>
+  )
 }
 
 export default Hero
