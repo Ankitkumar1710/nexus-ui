@@ -1,11 +1,9 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { Phone, MessageCircle } from 'lucide-react'
-import JobApplyForm from './JobApplyForm'
 
 const Hero = () => {
 
-  // COUNTER STATE
   const [counts, setCounts] = useState({
     projects: 0,
     clients: 0,
@@ -13,7 +11,6 @@ const Hero = () => {
     experience: 0,
   })
 
-  // COUNTER ANIMATION
   useEffect(() => {
 
     const targets = {
@@ -26,7 +23,6 @@ const Hero = () => {
     const duration = 2500
     const steps = 60
     const intervalTime = duration / steps
-
     let step = 0
 
     const interval = setInterval(() => {
@@ -40,7 +36,6 @@ const Hero = () => {
       })
 
       if (step === steps) clearInterval(interval)
-
     }, intervalTime)
 
     return () => clearInterval(interval)
@@ -72,89 +67,79 @@ const Hero = () => {
         <source src="/hero-bg.mp4" type="video/mp4" />
       </video>
 
-      {/* BLUR LAYER */}
+      {/* BLUR */}
       <div className="absolute inset-0 backdrop-blur-[6px]" />
 
-      {/* DARK GRADIENT OVERLAY */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80" />
+      {/* DARK OVERLAY */}
+      <div className="absolute inset-0 bg-black/70" />
 
       {/* CONTENT */}
-      <div className="relative z-10 container mx-auto px-4">
+      <div className="relative z-10 container mx-auto p-4 mt-8">
 
-        <div className="max-w-5xl mt-8 mx-auto text-center space-y-4">
+        <div className="max-w-5xl mx-auto text-center space-y-4 sm:space-y-6">
 
-  {/* HEADING */}
-  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-snug text-white whitespace-nowrap">
-    <span className="text-brand">Trusted Manpower</span> Service Provider
-  </h1>
+          {/* HEADING */}
+          <h1 className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white">
+            <span className="text-brand">Trusted Manpower</span> Service Provider
+          </h1>
 
-  {/* SUB TEXT */}
- <p className="text-base md:text-xl text-gray-200">
-  Delivering Workforce Solutions Trusted By Growing Businesses
-</p>
+          {/* SUB TEXT */}
+          <p className="text-sm sm:text-base md:text-xl text-gray-200">
+            Delivering Workforce Solutions Trusted By Growing Businesses
+          </p>
 
+          {/* DESCRIPTION */}
+          <p className="text-sm sm:text-base text-gray-300 max-w-xl mx-auto leading-relaxed">
+            We help companies complete projects faster by providing reliable,
+            verified and professional manpower for industrial, hospital and corporate needs.
+          </p>
 
+          {/* BUTTONS */}
+          <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 pt-2">
 
-  {/* DESCRIPTION */}
-  <p className="text-gray-300 max-w-xl mx-auto leading-relaxed">
-    We help companies complete projects faster by providing reliable,
-    verified and professional manpower for industrial, hospital and corporate needs.
-  </p>
+            <button
+              onClick={handleCall}
+              className="bg-brand hover:opacity-90 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold flex items-center justify-center shadow-xl transition w-full sm:w-auto"
+            >
+              <Phone className="w-5 h-5 mr-2" />
+              Call Now
+            </button>
 
-  {/* CTA BUTTONS */}
-  <div className="flex flex-col sm:flex-row justify-center gap-4 pt-2">
+            <button
+              onClick={handleWhatsApp}
+              className="border-2 border-white text-white hover:bg-white hover:text-black px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold flex items-center justify-center transition w-full sm:w-auto"
+            >
+              <MessageCircle className="w-5 h-5 mr-2" />
+              WhatsApp Us
+            </button>
 
-    <button
-      onClick={handleCall}
-      className="bg-brand hover:opacity-90 text-white px-8 py-4 rounded-lg font-semibold flex items-center justify-center shadow-xl transition"
-    >
-      <Phone className="w-5 h-5 mr-2" />
-      Call Now
-    </button>
+          </div>
 
-    <button
-      onClick={handleWhatsApp}
-      className="border-2 border-white text-white hover:bg-white hover:text-black px-8 py-4 rounded-lg font-semibold flex items-center justify-center transition"
-    >
-      <MessageCircle className="w-5 h-5 mr-2" />
-      WhatsApp Us
-    </button>
-  </div>
+          {/* COUNTERS */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mt-6">
 
-  {/* COUNTERS */}
-  <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-6">
+            {[
+              { value: counts.projects, label: 'Projects Completed' },
+              { value: counts.clients, label: 'Satisfied Clients' },
+              { value: counts.workforce, label: 'Skilled Workforce' },
+              { value: counts.experience, label: 'Years Experience' },
+            ].map((item, index) => (
+              <div
+                key={index}
+                className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl p-3 sm:p-4 shadow-lg"
+              >
+                <div className="text-xl sm:text-2xl md:text-3xl font-bold text-brand">
+                  {item.value}+
+                </div>
+                <p className="text-gray-200 text-xs sm:text-sm mt-1">
+                  {item.label}
+                </p>
+              </div>
+            ))}
 
-    <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl p-4 shadow-lg">
-      <div className="text-3xl font-bold text-brand">
-        {counts.projects}+
-      </div>
-      <p className="text-gray-200 text-sm mt-1">Projects Completed</p>
-    </div>
+          </div>
 
-    <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl p-4 shadow-lg">
-      <div className="text-3xl font-bold text-brand">
-        {counts.clients}+
-      </div>
-      <p className="text-gray-200 text-sm mt-1">Satisfied Clients</p>
-    </div>
-
-    <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl p-4 shadow-lg">
-      <div className="text-3xl font-bold text-brand">
-        {counts.workforce}+
-      </div>
-      <p className="text-gray-200 text-sm mt-1">Skilled Workforce</p>
-    </div>
-
-    <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl p-4 shadow-lg">
-      <div className="text-3xl font-bold text-brand">
-        {counts.experience}+
-      </div>
-      <p className="text-gray-200 text-sm mt-1">Years Experience</p>
-    </div>
-
-  </div>
-</div>
-
+        </div>
 
       </div>
 

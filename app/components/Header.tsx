@@ -1,26 +1,28 @@
 'use client'
+
 import { useState, useEffect } from 'react'
 import { Menu, X, Phone } from 'lucide-react'
 import Image from 'next/image'
-import ThemeToggle from './ThemeToggle'
 
 const Header = () => {
+
   const [isScrolled, setIsScrolled] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20)
     }
+
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      setIsMobileMenuOpen(false)
+  const scrollTo = (id: string) => {
+    const el = document.getElementById(id)
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' })
+      setMenuOpen(false)
     }
   }
 
@@ -28,116 +30,104 @@ const Header = () => {
     { label: 'Home', id: 'hero' },
     { label: 'About', id: 'about' },
     { label: 'Services', id: 'services' },
-    { label: 'Why Us', id: 'why-choose' },
     { label: 'Industries', id: 'industries' },
-    { label: 'FAQ', id: 'faq' },
     { label: 'Careers', id: 'careers' },
     { label: 'Contact', id: 'contact' },
   ]
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-white/95 dark:bg-black/90 backdrop-blur-md shadow-md'
-          : 'bg-white dark:bg-black'
-      }`}
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300
+        ${isScrolled ? 'bg-white/90 backdrop-blur shadow-md' : 'bg-white'}
+      `}
     >
+
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
+
+        {/* HEADER BAR */}
+        <div className="flex items-center justify-between h-[72px] md:h-[80px]">
 
           {/* LOGO */}
           <div
+            onClick={() => scrollTo('hero')}
             className="flex items-center cursor-pointer"
-            onClick={() => scrollToSection('hero')}
           >
             <Image
               src="/logo.png"
               alt="Nexus Solutions"
-              width={80}
-              height={80}
-              className="h-20 w-auto"
+              width={220}
+              height={70}
               priority
+              className="h-[48px] md:h-[56px] w-auto object-contain"
             />
           </div>
 
-          {/* DESKTOP NAV */}
-          <nav className="hidden lg:flex items-center space-x-8">
+          {/* DESKTOP MENU */}
+          <nav className="hidden lg:flex items-center gap-8">
+
             {navItems.map((item) => (
               <button
                 key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-brand transition-colors"
+                onClick={() => scrollTo(item.id)}
+                className="text-sm font-medium text-gray-700 hover:text-brand transition"
               >
                 {item.label}
               </button>
             ))}
-          </nav>
 
-          {/* RIGHT ACTIONS */}
-          <div className="hidden lg:flex items-center gap-4">
-
-            {/* 🌙 THEME TOGGLE BUTTON */}
-            <ThemeToggle />
-
-            {/* CALL BUTTON */}
             <button
-              onClick={() => window.open('tel:+917070637489', '_self')}
-              className="bg-brand hover:opacity-90 text-white px-5 py-2 rounded-lg font-semibold transition-all flex items-center shadow-md"
+              onClick={() => window.open('tel:+917070637489')}
+              className="bg-brand text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:opacity-90 transition"
             >
-              <Phone className="w-4 h-4 mr-2" />
+              <Phone size={16} />
               Call Now
             </button>
 
-          </div>
+          </nav>
 
-          {/* MOBILE MENU BUTTON */}
+          {/* MOBILE BUTTON */}
           <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 text-gray-700 dark:text-gray-300 hover:text-brand transition-colors"
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="lg:hidden text-gray-800"
           >
-            {isMobileMenuOpen ? (
-              <X className="w-6 h-6" />
-            ) : (
-              <Menu className="w-6 h-6" />
-            )}
+            {menuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
 
         </div>
 
         {/* MOBILE MENU */}
-        {isMobileMenuOpen && (
-          <div className="lg:hidden py-4 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-black">
-            <nav className="flex flex-col space-y-4">
+        {menuOpen && (
+
+          <div className="lg:hidden bg-white border-t">
+
+            <div className="flex flex-col p-4 gap-4">
 
               {navItems.map((item) => (
                 <button
                   key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className="text-left text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-brand transition-colors py-2"
+                  onClick={() => scrollTo(item.id)}
+                  className="text-left font-medium text-gray-700"
                 >
                   {item.label}
                 </button>
               ))}
 
-              {/* 🌙 MOBILE THEME TOGGLE */}
-              <div className="pt-2">
-                <ThemeToggle />
-              </div>
-
               <button
-                onClick={() => window.open('tel:+917070637489', '_self')}
-                className="bg-brand hover:opacity-90 text-white w-full px-4 py-2 rounded-lg font-semibold transition-all flex items-center justify-center shadow-md"
+                onClick={() => window.open('tel:+917070637489')}
+                className="bg-brand text-white py-2 rounded-lg flex items-center justify-center gap-2"
               >
-                <Phone className="w-4 h-4 mr-2" />
+                <Phone size={16} />
                 Call Now
               </button>
 
-            </nav>
+            </div>
+
           </div>
+
         )}
 
       </div>
+
     </header>
   )
 }
