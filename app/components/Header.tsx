@@ -1,21 +1,19 @@
 'use client'
-
 import { useState, useEffect } from 'react'
-import { Menu, X, Phone } from 'lucide-react'
+import { Menu, X, Briefcase } from 'lucide-react'
 import Image from 'next/image'
+import JobApplyForm from './JobApplyForm'
 
 const Header = () => {
 
   const [isScrolled, setIsScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [applyOpen, setApplyOpen] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20)
-    }
-
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    const onScroll = () => setIsScrolled(window.scrollY > 20)
+    window.addEventListener('scroll', onScroll)
+    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
   const scrollTo = (id: string) => {
@@ -36,99 +34,113 @@ const Header = () => {
   ]
 
   return (
-    <header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300
-        ${isScrolled ? 'bg-white/90 backdrop-blur shadow-md' : 'bg-white'}
-      `}
-    >
-
-      <div className="container mx-auto px-4">
-
-        {/* HEADER BAR */}
-        <div className="flex items-center justify-between h-[72px] md:h-[80px]">
-
+    <>
+      <header
+        className={`fixed top-0 left-0 w-full z-50 transition-all
+        ${isScrolled ? 'bg-white/90 backdrop-blur shadow-md' : 'bg-white'}`}
+      >
+        <div className="container mx-auto px-4">
           {/* LOGO */}
-          <div
-            onClick={() => scrollTo('hero')}
-            className="flex items-center cursor-pointer"
-          >
-            <Image
-              src="/logo.png"
-              alt="Nexus Solutions"
-              width={220}
-              height={70}
-              priority
-              className="h-[48px] md:h-[56px] w-auto object-contain"
-            />
-          </div>
-
-          {/* DESKTOP MENU */}
-          <nav className="hidden lg:flex items-center gap-8">
-
-            {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollTo(item.id)}
-                className="text-sm font-medium text-gray-700 hover:text-brand transition"
-              >
-                {item.label}
-              </button>
-            ))}
-
-            <button
-              onClick={() => window.open('tel:+917070637489')}
-              className="bg-brand text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:opacity-90 transition"
+          <div className="flex items-center justify-between h-[78px] md:h-[92px]">
+            <div
+              onClick={() => scrollTo('hero')}
+              className="cursor-pointer flex items-center"
             >
-              <Phone size={16} />
-              Call Now
-            </button>
+              <Image
+                src="/logoheader.png"
+                alt="logo"
+                width={220}
+                height={40}
+                priority
+                className="w-auto h-auto object-contain"
+              />
+            </div>
 
-          </nav>
 
-          {/* MOBILE BUTTON */}
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="lg:hidden text-gray-800"
-          >
-            {menuOpen ? <X size={28} /> : <Menu size={28} />}
-          </button>
 
-        </div>
+            {/* DESKTOP NAV */}
+            <nav className="hidden lg:flex items-center gap-8">
 
-        {/* MOBILE MENU */}
-        {menuOpen && (
-
-          <div className="lg:hidden bg-white border-t">
-
-            <div className="flex flex-col p-4 gap-4">
-
-              {navItems.map((item) => (
+              {navItems.map(item => (
                 <button
                   key={item.id}
                   onClick={() => scrollTo(item.id)}
-                  className="text-left font-medium text-gray-700"
+                  className="text-sm font-medium text-gray-700 hover:text-brand"
                 >
                   {item.label}
                 </button>
               ))}
 
               <button
-                onClick={() => window.open('tel:+917070637489')}
-                className="bg-brand text-white py-2 rounded-lg flex items-center justify-center gap-2"
+                onClick={() => setApplyOpen(true)}
+                className="bg-brand text-white px-5 py-2 rounded-lg flex items-center gap-2"
               >
-                <Phone size={16} />
-                Call Now
+                <Briefcase size={18} />
+                Apply Now
               </button>
 
-            </div>
+            </nav>
+
+            {/* MOBILE BUTTON */}
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="lg:hidden"
+            >
+              {menuOpen ? <X size={28} /> : <Menu size={28} />}
+            </button>
 
           </div>
 
-        )}
+          {/* MOBILE MENU */}
+          {menuOpen && (
+            <div className="lg:hidden bg-white border-t p-4 flex flex-col gap-4">
 
-      </div>
+              {navItems.map(item => (
+                <button
+                  key={item.id}
+                  onClick={() => scrollTo(item.id)}
+                  className="text-left font-medium"
+                >
+                  {item.label}
+                </button>
+              ))}
 
-    </header>
+              <button
+                onClick={() => setApplyOpen(true)}
+                className="bg-brand text-white py-2 rounded-lg"
+              >
+                Apply Now
+              </button>
+
+            </div>
+          )}
+
+        </div>
+      </header>
+
+      {/* APPLY POPUP */}
+      {applyOpen && (
+        <div className="fixed inset-0 z-[999] bg-black/70 flex items-center justify-center p-4">
+
+          <div className="bg-white rounded-xl w-full max-w-lg p-6 relative">
+
+            <button
+              onClick={() => setApplyOpen(false)}
+              className="absolute right-4 top-4"
+            >
+              <X />
+            </button>
+
+            <h2 className="text-2xl font-bold mb-6 text-center">
+              Apply For Job
+            </h2>
+
+            <JobApplyForm onSuccess={() => setApplyOpen(false)} />
+
+          </div>
+        </div>
+      )}
+    </>
   )
 }
 

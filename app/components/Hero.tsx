@@ -1,9 +1,11 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { Phone, MessageCircle } from 'lucide-react'
+import PartnerPopup from './PatnerPopup'
 
 const Hero = () => {
 
+  // COUNTER STATE
   const [counts, setCounts] = useState({
     projects: 0,
     clients: 0,
@@ -11,6 +13,10 @@ const Hero = () => {
     experience: 0,
   })
 
+  // PARTNER POPUP STATE
+  const [partnerOpen, setPartnerOpen] = useState(false)
+
+  // COUNTER ANIMATION
   useEffect(() => {
 
     const targets = {
@@ -79,7 +85,15 @@ const Hero = () => {
         <div className="max-w-5xl mx-auto text-center space-y-4 sm:space-y-6">
 
           {/* HEADING */}
+        
           <h1 className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white">
+            <div className="flex justify-center">
+    <div className="px-5 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-lg">
+      <p className="text-sm md:text-base tracking-widest text-white font-semibold uppercase">
+        Nexus Solutions
+      </p>
+    </div>
+  </div>
             <span className="text-brand">Trusted Manpower</span> Service Provider
           </h1>
 
@@ -97,20 +111,30 @@ const Hero = () => {
           {/* BUTTONS */}
           <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 pt-2">
 
+            {/* CALL */}
             <button
               onClick={handleCall}
-              className="bg-brand hover:opacity-90 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold flex items-center justify-center shadow-xl transition w-full sm:w-auto"
+              className="bg-brand text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold flex items-center justify-center shadow-xl w-full sm:w-auto"
             >
               <Phone className="w-5 h-5 mr-2" />
               Call Now
             </button>
 
+            {/* WHATSAPP */}
             <button
               onClick={handleWhatsApp}
-              className="border-2 border-white text-white hover:bg-white hover:text-black px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold flex items-center justify-center transition w-full sm:w-auto"
+              className="border-2 border-white text-white hover:bg-white hover:text-black px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold flex items-center justify-center w-full sm:w-auto"
             >
               <MessageCircle className="w-5 h-5 mr-2" />
               WhatsApp Us
+            </button>
+
+            {/* PARTNER */}
+            <button
+              onClick={() => setPartnerOpen(true)}
+              className="bg-brand text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold shadow-xl w-full sm:w-auto"
+            >
+              Become Partner
             </button>
 
           </div>
@@ -142,6 +166,9 @@ const Hero = () => {
         </div>
 
       </div>
+
+      {/* PARTNER POPUP */}
+      <PartnerPopup open={partnerOpen} setOpen={setPartnerOpen} />
 
     </section>
   )

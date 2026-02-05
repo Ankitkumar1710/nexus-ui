@@ -1,203 +1,136 @@
 'use client'
-
 import { useState } from 'react'
-import Image from 'next/image'
 
-const CareersForm = () => {
-
+const JobApplyForm = ({ onSuccess }: { onSuccess?: () => void }) => {
   const [loading, setLoading] = useState(false)
 
-  const [formData, setFormData] = useState({
+  const [form, setForm] = useState({
     name: '',
     phone: '',
-    email: '',
     location: '',
     jobType: '',
-    experience: ''
+    experience: '',
   })
 
-  const handleChange = (e: any) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    })
-  }
+  const [resume, setResume] = useState<File | null>(null)
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
     setLoading(true)
 
     try {
+      const formData = new FormData()
+      formData.append('name', form.name)
+      formData.append('phone', form.phone)
+      formData.append('location', form.location)
+      formData.append('jobType', form.jobType)
+      formData.append('experience', form.experience)
+
+      if (resume) {
+        formData.append('resume', resume)
+      }
 
       const res = await fetch('/api/send-email', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
+        body: formData,
       })
 
       const data = await res.json()
 
       if (data.success) {
-        alert('Application Submitted Successfully ✅')
-
-        setFormData({
+        alert('Application sent successfully ✅')
+        setForm({
           name: '',
           phone: '',
-          email: '',
           location: '',
           jobType: '',
-          experience: ''
+          experience: '',
         })
-
+        setResume(null)
+        onSuccess?.()
       } else {
-        alert('Submission Failed ❌')
+        alert('Failed ❌')
       }
 
-    } catch (error) {
-      console.error(error)
-      alert('Server Error ❌')
+    } catch (err) {
+      alert('Server error ❌')
     }
 
     setLoading(false)
   }
 
   return (
+    <form onSubmit={handleSubmit} className="space-y-4">
 
-    <section
-      id="careers"
-      className="py-20 bg-gradient-to-br from-gray-100 via-white to-red-50 dark:from-black dark:via-[#0f0f0f] dark:to-black"
-    >
+      <input
+        required
+        placeholder="Full Name"
+        className="w-full border p-3 rounded"
+        value={form.name}
+        onChange={e => setForm({ ...form, name: e.target.value })}
+      />
 
-      <div className="container mx-auto px-4">
+      <input
+        required
+        placeholder="Mobile Number"
+        className="w-full border p-3 rounded"
+        value={form.phone}
+        onChange={e => setForm({ ...form, phone: e.target.value })}
+      />
 
-        {/* SECTION TITLE */}
-        <div className="text-center mb-14">
-          <h2 className="text-3xl md:text-4xl font-bold">
-            Apply For <span className="text-brand">Job</span>
-          </h2>
+      <input
+        placeholder="Location"
+        className="w-full border p-3 rounded"
+        value={form.location}
+        onChange={e => setForm({ ...form, location: e.target.value })}
+      />
 
-          <div className="w-24 h-1 bg-brand mx-auto mt-3 mb-4"></div>
+      <select
+        required
+        className="w-full border p-3 rounded"
+        value={form.jobType}
+        onChange={e => setForm({ ...form, jobType: e.target.value })}
+      >
+        <option value="">Select Job Type</option>
+        <option>Helper</option>
+        <option>Security Guard</option>
+        <option>Factory Worker</option>
+        <option>Office Boy</option>
+        <option>Driver</option>
+        <option>Other</option>
+      </select>
 
-          <p className="text-gray-600 dark:text-gray-400">
-            Submit your details and our team will contact you shortly
-          </p>
-        </div>
+      <textarea
+        placeholder="Experience"
+        className="w-full border p-3 rounded"
+        value={form.experience}
+        onChange={e => setForm({ ...form, experience: e.target.value })}
+      />
 
-        {/* GRID */}
-        <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
-
-          {/* LEFT IMAGE */}
-          <div className="flex justify-center">
-
-            <div className="relative">
-
-              <div className="absolute -inset-6 bg-brand/20 blur-3xl rounded-full"></div>
-
-              <Image
-                src="/w8.png"   // public folder image
-                alt="Careers"
-                width={420}
-                height={400}
-                className="relative rounded-xl shadow-xl"
-              />
-
-            </div>
-
-          </div>
-
-          {/* FORM */}
-          <div className="bg-white dark:bg-[#141414] p-8 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700">
-
-            <h3 className="text-2xl font-bold mb-6 text-center">
-              Job Application Form
-            </h3>
-
-            <form
-              onSubmit={handleSubmit}
-              className="space-y-4"
-            >
-
-              <input
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                placeholder="Full Name"
-                required
-                className="w-full border p-3 rounded"
-              />
-
-              <input
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                placeholder="Mobile Number"
-                required
-                className="w-full border p-3 rounded"
-              />
-
-              <input
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="Email (Optional)"
-                className="w-full border p-3 rounded"
-              />
-
-              <input
-                name="location"
-                value={formData.location}
-                onChange={handleChange}
-                placeholder="Location"
-                required
-                className="w-full border p-3 rounded"
-              />
-
-            <select
-  value={formData.jobType}
-  onChange={(e) => setFormData({ ...formData, jobType: e.target.value })}
-  className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand"
-  required
->
-  <option value="">Select Job Type</option>
-
-  <option value="Hospital Staff">Hospital Staff</option>
-  <option value="Factory Worker">Factory Worker</option>
-  <option value="Office Helper">Office Helper</option>
-  <option value="Security Guard">Security Guard</option>
-  <option value="Construction Labour">Construction Labour</option>
-
-  <option value="Other">Other</option>
-</select>
-
-              <input
-                name="experience"
-                value={formData.experience}
-                onChange={handleChange}
-                placeholder="Experience"
-                required
-                className="w-full border p-3 rounded"
-              />
-
-              <button
-                disabled={loading}
-                type="submit"
-                className="bg-brand text-white w-full py-3 rounded-lg font-semibold hover:opacity-90 transition"
-              >
-                {loading ? 'Submitting...' : 'Submit Application'}
-              </button>
-
-            </form>
-
-          </div>
-
-        </div>
-
+      {/* RESUME UPLOAD OPTIONAL */}
+      <div>
+        <label className="text-sm font-medium">Upload Resume (optional)</label>
+        <input
+          type="file"
+          accept=".pdf,.doc,.docx"
+          className="w-full border p-2 rounded mt-1"
+          onChange={(e) => {
+            if (e.target.files && e.target.files[0]) {
+              setResume(e.target.files[0])
+            }
+          }}
+        />
       </div>
 
-    </section>
+      <button
+        disabled={loading}
+        className="w-full bg-brand text-white py-3 rounded-lg font-semibold"
+      >
+        {loading ? 'Submitting...' : 'Apply Now'}
+      </button>
+
+    </form>
   )
 }
 
-export default CareersForm
+export default JobApplyForm

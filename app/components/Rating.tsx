@@ -92,12 +92,6 @@ const Rating = () => {
                                 {/* PROFILE */}
                                 <div className="flex items-center gap-3 mb-3">
 
-                                    <img
-                                        src={item.img}
-                                        alt={item.name}
-                                        className="w-12 h-12 rounded-full object-cover"
-                                    />
-
                                     <div>
                                         <h4 className="font-semibold text-gray-900 dark:text-white">
                                             {item.name}

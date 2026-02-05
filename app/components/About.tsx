@@ -58,7 +58,7 @@ const About = () => {
             <div className="absolute -inset-2 bg-brand/20 blur-2xl rounded-xl"></div>
 
             <img
-              src="/hero.png"
+              src="/about1.png"
               alt="Manpower Team"
               className="
                 relative
